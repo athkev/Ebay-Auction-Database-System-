@@ -1,0 +1,70 @@
+AuctionUser(User_ID, username, emailaddress, phonenumber, password, homeaddress, gender, age).
+Primary key - User_ID
+2NF 
+User_ID  -> username
+User_ID  ->emailaddress
+User_ID  -> phonenumber
+User_ID  -> password
+User_ID  -> homeaddress
+User_ID  -> gender
+User_ID  -> age
+3NF
+User_ID  -> username, emailaddress, phonenumber, password, homeaddress, gender, age
+
+Seller(sellerID, depositinfo, userid)
+Primary key – sellerID
+Foreign key - userID
+2NF
+sellerID -> depositinfo
+sellerID -> userid
+3NF
+sellerID -> depositinfo , userID 
+
+Bidder(bidderId, shippingaddress, paymentinfo, userID)
+Primary key – bidderID 
+Foreign key - userID
+2NF 
+bidderid -> shippingaddress
+bidderid -> paymentinfo
+bidderid -> userID
+3NF
+bidderid -> shippingaddress, paymentinfo, userID
+
+Bid(bidid, bidderid, price, status, submittime)
+Primary key - BidID
+2NF 
+bidid -> bidderid
+bidid  -> price
+bidid -> status
+bidid -> submittime
+3NF
+bidid -> bidderid, price, status, submittime
+
+
+AucitonItem(auctionitemid, title, description, startprice, endprice, starttime, endtime, sellerid, bidid)
+Primary key – auctionitemid
+Foreign key - sellerid, bidid
+2NF  
+Auctionitemid -> title
+Auctionitemid  -> description
+Auctionitemid  ->  startprice
+Auctionitemid  ->  endprice
+Auctionitemid  -> starttime
+Auctionitemid  -> endtime
+Auctionitemid  -> sellerid
+Auctionitemid  -> bidid
+3NF
+Auctionitemid  -> title, description, startprice, endprice, starttime, endtime, sellerid, bidid
+
+ItemCategory(CategoryID, Categoryname,AuctionItemID)
+Primary key – category ID
+Foreign key - AuctionItemID
+2NF 
+CategoryID  ->  Categoryname
+CategoryID  ->   AuctionItemID
+3NF
+CategoryID  ->  Categoryname, AuctionItemID
+
+
+
+

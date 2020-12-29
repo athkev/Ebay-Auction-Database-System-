@@ -1,0 +1,48 @@
+Name         Null?    Type          
+------------ -------- ------------- 
+USERNAME     NOT NULL VARCHAR2(30)  
+USERID       NOT NULL NUMBER(38)    
+EMAILADDRESS NOT NULL VARCHAR2(255) 
+PHONENUMBER           VARCHAR2(10)  
+PASSWORD     NOT NULL VARCHAR2(32)  
+HOMEADDRESS           VARCHAR2(40)  
+
+Name        Null?    Type          
+----------- -------- ------------- 
+SELLERID    NOT NULL NUMBER(38)    
+DEPOSITINFO NOT NULL VARCHAR2(255) 
+USERID      NOT NULL NUMBER(38)   
+ 
+Name       Null?    Type         
+---------- -------- ------------ 
+PRICE      NOT NULL NUMBER(10,2) 
+BIDID      NOT NULL NUMBER(38)   
+BIDDERID   NOT NULL NUMBER(38)   
+STATUS              CHAR(1)      
+ID         NOT NULL NUMBER(38)   
+SUBMITTIME          TIMESTAMP(6) 
+
+Name          Null?    Type          
+------------- -------- ------------- 
+AUCTIONITEMID NOT NULL NUMBER(38)    
+TITLE         NOT NULL VARCHAR2(255) 
+DESCRIPTION_           VARCHAR2(500) 
+STARTPRICE    NOT NULL NUMBER(10,2)  
+ENDPRICE      NOT NULL NUMBER(10,2)  
+STARTTIME     NOT NULL DATE          
+ENDTIME       NOT NULL DATE          
+SELLERID      NOT NULL NUMBER(38)    
+BIDID         NOT NULL NUMBER(38)    
+
+Name          Null?    Type         
+------------- -------- ------------ 
+CATEGORYNAME           VARCHAR2(32) 
+CATEGORYID    NOT NULL NUMBER(38)   
+AUCTIONITEMID NOT NULL NUMBER(38)   
+
+Name            Null?    Type          
+--------------- -------- ------------- 
+BIDDERID        NOT NULL NUMBER(38)    
+SHIPPINGADDRESS NOT NULL VARCHAR2(255) 
+PAYMENTINFO     NOT NULL VARCHAR2(255) 
+USERID          NOT NULL NUMBER(38) 

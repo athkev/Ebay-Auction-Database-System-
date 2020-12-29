@@ -1,0 +1,80 @@
+/* A4 - second part*/
+
+/* VIEW #1 */
+CREATE VIEW bidBelow100 AS
+    (SELECT * FROM Bid WHERE Price < 100);
+/* VIEW #2 */
+CREATE VIEW electronicCategory AS
+    (SELECT *
+    FROM ItemCategory
+    WHERE CategoryID = 3);
+/* VIEW #3 */
+CREATE VIEW user_age_greater_23 AS
+    (SELECT * FROM AUCTIONUSER WHERE age > 23);
+
+/* JOIN QUERY #1 show male seller username and age */
+SELECT DISTINCT u.USERNAME, u.AGE, s.sellerid
+FROM AUCTIONUSER u, BIDDER b, SELLER s, AUCTIONITEM i
+WHERE u.gender = 'M'
+      AND u.USERID = s.USERID
+      AND s.SELLERID = i.SELLERID
+ORDER BY sellerid ASC;
+
+/*JOIN QUERY #2  show listed item cost more than 100 dollars and who purchased*/
+SELECT i.TITLE, i.ENDTIME, b.BIDDERID, u.USERNAME
+FROM AUCTIONITEM i, BID bid, ITEMCATEGORY ic, BIDDER b, AUCTIONUSER u
+WHERE i.ENDPRICE >= 100
+      AND u.USERID = b.USERID
+      AND b.BIDDERID = bid.BIDDERID
+      AND bid.BIDID = i.BIDID
+      AND i.AUCTIONITEMID = ic.AUCTIONITEMID
+ORDER BY i.ENDTIME DESC;
+
+/* A5 */
+
+/*Q1-EXISTS and COUNT and HAVING and GROUP BY: lists number of sales from each seller who is above 19 yr old*/
+SELECT COUNT(AUCTIONITEMID), SELLERID
+FROM AUCTIONITEM i
+WHERE EXISTS
+(SELECT SELLERID FROM SELLER s WHERE EXISTS
+(SELECT AGE FROM AUCTIONUSER u WHERE s.USERID = u.USERID AND u.AGE > 19)
+) group by SELLERID
+HAVING COUNT(AUCTIONITEMID) > 1
+;
+
+/* Q2-EXISTS, UNION, COUNT: count the number of user who is neither seller/buyer: who only created account */
+SELECT COUNT(USERNAME)
+FROM AUCTIONUSER u
+WHERE NOT EXISTS 
+(SELECT u.USERID 
+FROM BIDDER b
+WHERE b.USERID = u.USERID
+UNION
+(SELECT u.USERID 
+FROM SELLER s
+WHERE s.USERID = u.USERID)); 
+
+/*Q3-UNION and EXISTS: lists which sold for over $100 or under 5 days*/
+SELECT * 
+FROM AUCTIONITEM
+WHERE (ENDPRICE-STARTPRICE)>100
+UNION
+SELECT * 
+FROM AUCTIONITEM
+WHERE (ENDTIME-STARTTIME)<5;
+
+/*Q4-MINUS: show transaction older than 15 days */
+SELECT i.title, i.endtime
+FROM AUCTIONITEM i, bid b
+WHERE status = 'c'
+    MINUS 
+        (SELECT ai.title, ai.endtime
+         FROM auctionitem ai
+         WHERE ai.ENDTIME >= CURRENT_DATE - 15 );
+         
+/*Q5-COUNT and GROUP BY: lists the numbder of bids made, based off of bidder id*/
+SELECT COUNT(BIDID),BIDDERID
+FROM BID
+GROUP BY BIDDERID;
+
+

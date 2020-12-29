@@ -1,0 +1,30 @@
+A6 Functional Dependencies - Online auction system 
+
+Table: AUCTIONUSER
+Attributes: User_ID, username, emailaddress, phonenumber, password, homeaddress, gender, age
+User_ID -> username, emailadress, phonenumber, password, homeaddress, gender, age
+username -> User_ID 
+
+Table: AUCTIONITEM
+Attributes: auctionitemid, title, description startprice, endprice, starttime, endtime, sellerid, bidid 
+auctionitemid -> title, description startprice, endprice, starttime, endtime, sellerid, bidid 
+
+Table: BID 
+Attributes: bidid, bidderid, price, status, submittime 
+bidID -> bidderID, price, status, submittime
+
+Table: BIDDER 
+Attributes: bidderId, shippingaddress, paymentinfo, userID
+bidderID -> shippingaddress, paymentinfo, userID
+userID -> bidderID 
+
+Table: SELLER
+Attributes: sellerID, depositinfo, userid
+sellerID -> depositinfo, userid
+userid -> sellerID 
+
+Table: ITEMCATEGORY
+Attributes: Category_ID, categoryname, auctionitemid 
+CategoryID -> CategoryName
+CategoryName -> CategoryID
+auctionitemid -> categoryID 
